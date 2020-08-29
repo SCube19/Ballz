@@ -70,6 +70,11 @@ Vector2f Ball::getPosition()
 	return position;
 }
 
+float Ball::getMass()
+{
+	return mass;
+}
+
 ///////////////////////SETTERS////////////////////////////
 
 void Ball::setVelocity(Vector2f newVel)

@@ -30,4 +30,5 @@ public:
 	float getRadius();
 	Vector2f getPosition();
 	void setColor(Color newColor);
+	float getMass();
 };

@@ -2,6 +2,7 @@
 #include "Ball.h"
 #include "Collisions.h"
 #include "Maths.h"
+#include "Physics.h"
 
 using namespace sf;
 
@@ -25,6 +26,11 @@ int main()
 	Ball ball, ball2(40, 2, Vector2f(0.5, 1), Vector2f(200, 200)), ball3(50, 2, Vector2f(sqrt(2)/2, 0.5), Vector2f(400, 250))
 		, ball4(20, 1, Vector2f(1, 0.5), Vector2f(1000, 1000)),
 		ball5(100, 1, Vector2f(0.5, 0.75), Vector2f(1500, 500));
+
+	Ball sun(100, 3, Vector2f(0.25, -0.5), Vector2f(1920 / 2, 1080 / 2)), planet(20, 1, Vector2f(0.45, 0), Vector2f(50, 50));
+	ballz.push_back(sun);
+	ballz.push_back(planet);
+	
 	ballz.push_back(ball);
 	ballz.push_back(ball2);
 	ballz.push_back(ball3);
@@ -56,9 +62,17 @@ int main()
 		//time passed from last frame
 		Time frameTime = updateLimiter.restart();
 		
+		for (int i = 0; i < ballz.size(); i++)
+			for (int j = i + 1; j < ballz.size(); j++)
+				gravity(ballz[i], ballz[j]);
+				
+			
+		
 		//position update
-		for (auto &x: ballz)
+		for (auto& x : ballz)
+		{
 			x.move(frameTime);
+		}
 
 		//screen collisions
 		for (auto &x: ballz)
