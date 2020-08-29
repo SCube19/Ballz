@@ -1,0 +1,9 @@
+Ballz.sln
+Debug/
+./
+../
+.vs/
+Ballz/Debug/
+Ballz/Ballz.vcxproj.filters
+Ballz/Ballz.vcxproj.user
+Ballz/Ballz.vcxproj
