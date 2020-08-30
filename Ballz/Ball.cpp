@@ -1,9 +1,8 @@
 #include "Ball.h"
 #include "Maths.h"
-
 ///////////////////////CONSTRUCTORS//////////////////////////////////
 
-Ball::Ball()
+Ball::Ball(SoundBuffer& sound)
 {
 	mass = 1.0f;
 	radius = 50.0f;
@@ -12,14 +11,18 @@ Ball::Ball()
 	position.x = 500;
 	position.y = 500;
 	color = Color::Transparent;
+	screenCollision = false;
+	hit.setBuffer(sound);
 }
 
-Ball::Ball(float radius, float mass, Vector2f initVelocity, Vector2f initPosition)
+Ball::Ball(float radius, float mass, Vector2f initVelocity, Vector2f initPosition, SoundBuffer& sound)
 {
 	this->radius = radius;
 	this->mass = mass;
 	velocity = initVelocity;
 	position = initPosition;
+	hit.setBuffer(sound);
+	screenCollision = false;
 }
 
 
@@ -31,6 +34,8 @@ void Ball::draw(RenderWindow& window, CircleShape& circle, VertexArray line)
 	circle.setOrigin(radius, radius);
 	circle.setPosition(position);
 	circle.setFillColor(color);
+	if (screenCollision)
+		circle.setFillColor(Color::Red);
 
 	window.draw(circle);
 
@@ -53,6 +58,12 @@ void Ball::move(Vector2f displacement)
 	position += displacement;
 }
 
+///////////////////PLAY///////////////////////////////
+
+void Ball::play()
+{
+	hit.play();
+}
 ////////////////////////GETTERS////////////////////////////
 
 Vector2f Ball::getVelocity()
@@ -75,6 +86,10 @@ float Ball::getMass()
 	return mass;
 }
 
+bool Ball::screenCollided()
+{
+	return screenCollision;
+}
 ///////////////////////SETTERS////////////////////////////
 
 void Ball::setVelocity(Vector2f newVel)
@@ -85,4 +100,14 @@ void Ball::setVelocity(Vector2f newVel)
 void Ball::setColor(Color newColor)
 {
 	color = newColor;
+}
+
+void Ball::setPosition(Vector2f newPos)
+{
+	position = newPos;
+}
+
+void Ball::setScreenCollision(bool state)
+{
+	screenCollision = state;
 }
