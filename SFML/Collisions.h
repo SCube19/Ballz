@@ -3,13 +3,13 @@
 #include <SFML/Audio.hpp>
 
 //collision detection
-bool areColliding(Ball& first, Ball& second);
+bool areColliding(const Ball& first, const Ball& second);
 
 //screen collision detection and resolution
-void screenCollision(Ball& ball, RenderWindow& window);
+void screenCollision(Ball& ball, const RenderWindow& window);
 
 //collision with mouse
-bool mouseCollision(Ball& ball, Vector2i mousePos);
+bool mouseCollision(const Ball& ball, const Vector2i& mousePos);
 
 //static resolution of collision(unexpected behaviour when balls are not colliding)
 void staticCollisionResolution(Ball& first, Ball& second);

@@ -5,8 +5,7 @@
 #include <iostream>
 
 /////////////////////////////////ARE COLLIDING////////////////////////////////
-
-bool areColliding(Ball& first, Ball& second)
+bool areColliding(const Ball& first, const Ball& second)
 {
 	//|(x1 - x2)^2 + (y1 - y2)^2| <= (r1 + r2)^2 to avoid sqrt()
 	return fabs((first.getPosition().x - second.getPosition().x) * (first.getPosition().x - second.getPosition().x)
@@ -16,8 +15,7 @@ bool areColliding(Ball& first, Ball& second)
 
 ///////////////////////////////////////SCREEN COLLISION/////////////////////////
 //propably can be shortened
-
-void screenCollision(Ball& ball, RenderWindow& window)
+void screenCollision(Ball& ball, const RenderWindow& window)
 {
 	//left
 	if (ball.getPosition().x - ball.getRadius() < 0)
@@ -31,8 +29,7 @@ void screenCollision(Ball& ball, RenderWindow& window)
 		float displacement = -ball.getPosition().x + ball.getRadius();
 
 		ball.move(Vector2f(displacement, a * displacement));
-		std::cout << "Collision\n";
-		
+		//std::cout << "Collision\n";
 	}
 	//right
 	else if (ball.getPosition().x + ball.getRadius() > window.getSize().x)
@@ -43,10 +40,10 @@ void screenCollision(Ball& ball, RenderWindow& window)
 		if (ball.getVelocity().x != 0)
 			a = ball.getVelocity().y / ball.getVelocity().x;
 
-		float displacement = 1920 - ball.getPosition().x - ball.getRadius();
+		float displacement = window.getSize().x - ball.getPosition().x - ball.getRadius();
 
 		ball.move(Vector2f(displacement, a * displacement));
-		std::cout << "Coll\n";
+		//std::cout << "Coll\n";
 	}
 	//up
 	if (ball.getPosition().y - ball.getRadius() < 0)
@@ -61,7 +58,7 @@ void screenCollision(Ball& ball, RenderWindow& window)
 
 		ball.move(Vector2f(displacement * a, displacement));
 		
-		std::cout << "Coll\n";
+		//std::cout << "Coll\n";
 	}
 	//down
 	else if (ball.getPosition().y + ball.getRadius() > window.getSize().y)
@@ -72,11 +69,11 @@ void screenCollision(Ball& ball, RenderWindow& window)
 		if (ball.getVelocity().y != 0)
 			a = ball.getVelocity().x / ball.getVelocity().y;
 
-		float displacement = 1080 - ball.getPosition().y - ball.getRadius();
+		float displacement = window.getSize().y - ball.getPosition().y - ball.getRadius();
 
 		ball.move(Vector2f(displacement * a, displacement));
 		
-		std::cout << "Coll\n";
+		//std::cout << "Coll\n";
 	}
 	else
 		ball.setScreenCollision(false);
@@ -84,7 +81,7 @@ void screenCollision(Ball& ball, RenderWindow& window)
 
 //////////////////////////MOUSE COLLISION//////////////////
 
-bool mouseCollision(Ball& ball, Vector2i mouse)
+bool mouseCollision(const Ball& ball, const Vector2i& mouse)
 {
 	return fabs((ball.getPosition().x - (float)mouse.x) * (ball.getPosition().x - (float)mouse.x)
 		+ (ball.getPosition().y - (float)mouse.y) * (ball.getPosition().y - (float)mouse.y))
