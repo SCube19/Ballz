@@ -7,6 +7,7 @@ using namespace sf;
 namespace 
 {
 	//Structure to optimize memory (static members were not allowed)
+	//Later the addition of custom textures is planned
 	struct BallTexture
 	{
 		CircleShape shape;
@@ -24,49 +25,53 @@ namespace
 
 class Ball
 {
-	//physical variables
+	//Physical variables
 	float mass;
 	float radius;
 	Vector2f velocity;
 	Vector2f position;
+	Vector2f acceleration;
 
-	//additional variables
+	//State variables
+	bool screenCollision;
+
+	//Additional variables
 	Color color;
 	Sound hit;
 
-	//state variables
-	bool screenCollision;
-
 public:
 
-	//default constructor 
+	//Default constructor 
 	Ball(const SoundBuffer& sound);
 
-	//customizable constructor
+	//Customizable constructor
 	Ball(float radius, float mass, const Vector2f& initVelocity, const Vector2f& initPosition, const SoundBuffer& sound);
 
-	//draw func
-	void draw(RenderWindow& window);
+	//Draw function
+	//A ball is drawn on [window] based on its internal variables
+	void draw(RenderWindow& window) const;
 
-	//real-time move using velocity
+	//Real-time move using velocity
 	void move(const Time& elapsed);
 	//fixed value move
 	void move(const Vector2f& displacement);
 
-	//play hit sound
+	//Plays sound bound to a ball
 	void play();
 
-	//getters & setters
-	float getRadius() const;
-	float getMass() const;
-	Vector2f getPosition() const;
+	//Getters & Setters
 	Vector2f getVelocity() const;
+	float getRadius() const;
+	Vector2f getPosition() const;
+	float getMass() const;
+	Vector2f getAcceleration() const;
 	bool screenCollided() const;
+	
 
 	void setVelocity(const Vector2f& newVel);
 	void setColor(const Color& newColor);
 	void setPosition(const Vector2f& newPos);
 	void setScreenCollision(bool state);
-
-	void accelerate();
+	void setAcceleration(const Vector2f& newAcc);
+	void accelerate(const Vector2f& acc);
 };
