@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
+
 #include "Ball.h"
 #include "Collisions.h"
 #include "Maths.h"
 #include "Physics.h"
-#include <SFML/Audio.hpp>
-#include <iostream>
+
 
 using namespace sf;
 
@@ -36,9 +38,9 @@ int main()
 	//ballz.push_back(sun);
 	//ballz.push_back(planet);
 	
-	//ballz.push_back(ball);
-	//ballz.push_back(ball2);
-	//ballz.push_back(ball3);
+	ballz.push_back(ball);
+	ballz.push_back(ball2);
+	ballz.push_back(ball3);
 	//ballz.push_back(ball4);
 	//ballz.push_back(ball5);
 
@@ -72,7 +74,7 @@ int main()
 				{
 					selectedBall = nullptr;
 					for (auto& x : ballz)
-						if (mouseCollision(x, Mouse::getPosition()))
+						if (Ballz::mouseCollision(x, Mouse::getPosition()))
 						{
 							x.setColor(Color::Red);
 							selectedBall = &x;
@@ -96,9 +98,9 @@ int main()
 		Time frameTime = updateLimiter.restart();
 		
 		//physics
-		for (int i = 0; i < ballz.size(); i++)
-			for (int j = i + 1; j < ballz.size(); j++)
-				gravity(ballz[i], ballz[j]);
+		//for (int i = 0; i < ballz.size(); i++)
+			//for (int j = i + 1; j < ballz.size(); j++)
+				//gravity(ballz[i], ballz[j]);
 		
 		//interaction
 		if (selectedBall != nullptr)
@@ -113,7 +115,7 @@ int main()
 		//screen collisions detection and resolution
 		for (auto& x : ballz)
 		{
-			screenCollision(x, window);
+			Ballz::screenCollisionResolution(x, window);
 		}
 
 		//vector of pairs of collided balls
@@ -124,9 +126,9 @@ int main()
 		{
 			for (auto j = 0; j < ballz.size(); j++)
 			{
-				if (i != j && areColliding(ballz[i], ballz[j]))
+				if (i != j && Ballz::areColliding(ballz[i], ballz[j]))
 				{
-					staticCollisionResolution(ballz[i], ballz[j]);
+					Ballz::staticCollisionResolution(ballz[i], ballz[j]);
 					std::pair<Ball&, Ball&> collisionPair(ballz[i] , ballz[j]);
 					collidedBallz.push_back(collisionPair);
 				}
@@ -135,7 +137,7 @@ int main()
 		
 		//dynamic collision resolution
 		for (auto& x : collidedBallz)
-			dynamicCollisionResolution(x.first, x.second);
+			Ballz::dynamicCollisionResolution(x.first, x.second);
 
 		//render 
 		window.clear();

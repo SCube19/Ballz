@@ -1,4 +1,7 @@
 #pragma once
 #include "Ball.h"
 
-void gravity(Ball& first, Ball& second);
+namespace Ballz
+{
+	void gravity(Ball& first, Ball& second);
+}

@@ -4,7 +4,7 @@
 
 using namespace sf;
 
-namespace
+namespace 
 {
 	//Structure to optimize memory (static members were not allowed)
 	struct BallTexture

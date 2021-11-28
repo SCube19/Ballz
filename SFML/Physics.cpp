@@ -12,7 +12,7 @@
 	second.move(-force);
 }*/
 
-void gravity(Ball& first, Ball& second)
+void Ballz::gravity(Ball& first, Ball& second)
 {
 	const float G = 10000;
 

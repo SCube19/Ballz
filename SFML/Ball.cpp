@@ -37,7 +37,7 @@ void Ball::draw(RenderWindow& window)
 	window.draw(texture.shape);
 
 	texture.line[0].position = texture.shape.getPosition();
-	texture.line[1].position = texture.line[0].position + normalize(velocity) * radius;
+	texture.line[1].position = texture.line[0].position + Ballz::normalize(velocity) * radius;
 	window.draw(texture.line);
 }
 

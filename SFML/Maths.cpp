@@ -3,7 +3,7 @@
 #include<iostream>
 
 ////////////////DISTANCE////////////////////////
-float distance(const Ball& first, const Ball& second)
+float Ballz::distance(const Ball& first, const Ball& second)
 {
 	float xdiff = first.getPosition().x - second.getPosition().x;
 	float ydiff = first.getPosition().y - second.getPosition().y;
@@ -12,13 +12,13 @@ float distance(const Ball& first, const Ball& second)
 }
 
 //////////////////////////VECTOR LENGTH//////////////////////////
-float vectorLength(const Vector2f& vec)
+float Ballz::vectorLength(const Vector2f& vec)
 {
 	return sqrt(vec.x * vec.x + vec.y * vec.y);
 }
 
 ///////////////////////////NORMALIZE//////////////////////////
-Vector2f normalize(const Vector2f& inputV)
+Vector2f Ballz::normalize(const Vector2f& inputV)
 {
 	float l = vectorLength(inputV);
 	if (l == 0)
@@ -27,25 +27,31 @@ Vector2f normalize(const Vector2f& inputV)
 }
 
 ///////////////////SGN//////////////////////////////
-int sgn(float x)
+int Ballz::sgn(float x)
 {
 	return (0 < x) - (x < 0);
 }
 
 /////////////////////////OVERLAP/////////////////////////
-float overlap(const Ball& first, const Ball& second)
+float Ballz::overlap(const Ball& first, const Ball& second)
 {
 	return first.getRadius() + second.getRadius() - distance(first, second);
 }
 
 ////////////////////DIRECTION VECTOR/////////////////////////
-Vector2f directionVector(const Ball& first, const Ball& second)
+Vector2f Ballz::directionVector(const Ball& first, const Ball& second)
 {
 	return second.getPosition() - first.getPosition();
 }
 
 ///////////////////DOT PRODUCT//////////////////////////
-float dotProduct(const Vector2f& vec1, const Vector2f& vec2)
+float Ballz::dotProduct(const Vector2f& vec1, const Vector2f& vec2)
 {
 	return vec1.x * vec2.x + vec1.y * vec2.y;
+}
+
+/////////////////VECTOR LINE////////////////////////////
+float Ballz::vectorLine(const Vector2f& vec)
+{
+	return vec.x == 0 ? 0 : vec.y / vec.x;
 }
