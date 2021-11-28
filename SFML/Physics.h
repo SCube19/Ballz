@@ -1,4 +1,8 @@
 #pragma once
 #include "Ball.h"
 
-void gravity(Ball& first, Ball& second);
+namespace Ballz
+{
+	//Moves ballz according to Newton's law of gravity
+	void gravity(Ball& first, Ball& second);
+}

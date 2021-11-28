@@ -23,8 +23,7 @@ Ball::Ball(float radius, float mass, const Vector2f& initVelocity, const Vector2
 
 
 ///////////////////////////DRAW///////////////////////////////////////
-
-void Ball::draw(RenderWindow& window)
+void Ball::draw(RenderWindow& window) const
 {
 	//change blueprint shape to match this object
 	texture.shape.setRadius(radius);
@@ -37,12 +36,11 @@ void Ball::draw(RenderWindow& window)
 	window.draw(texture.shape);
 
 	texture.line[0].position = texture.shape.getPosition();
-	texture.line[1].position = texture.line[0].position + normalize(velocity) * radius;
+	texture.line[1].position = texture.line[0].position + Ballz::normalize(velocity) * radius;
 	window.draw(texture.line);
 }
 
 ///////////////////////////////////////MOVE/////////////////////////////////////////
-
 void Ball::move(const Time& elapsed)
 {
 	position += Vector2f(velocity.x * elapsed.asMilliseconds(), velocity.y * elapsed.asMilliseconds());
@@ -54,13 +52,11 @@ void Ball::move(const Vector2f& displacement)
 }
 
 ///////////////////PLAY///////////////////////////////
-
 void Ball::play()
 {
 	hit.play();
 }
 ////////////////////////GETTERS////////////////////////////
-
 Vector2f Ball::getVelocity() const
 {
 	return velocity;
@@ -81,12 +77,17 @@ float Ball::getMass() const
 	return mass;
 }
 
+Vector2f Ball::getAcceleration() const
+{
+	return acceleration;
+}
+
 bool Ball::screenCollided() const
 {
 	return screenCollision;
 }
-///////////////////////SETTERS////////////////////////////
 
+///////////////////////SETTERS////////////////////////////
 void Ball::setVelocity(const Vector2f& newVel)
 {
 	velocity = newVel;
@@ -105,4 +106,14 @@ void Ball::setPosition(const Vector2f& newPos)
 void Ball::setScreenCollision(bool state)
 {
 	screenCollision = state;
+}
+
+void Ball::setAcceleration(const Vector2f& newAcc)
+{
+	acceleration = newAcc;
+}
+
+void Ball::accelerate(const Vector2f& acc)
+{
+	acceleration += acc;
 }
