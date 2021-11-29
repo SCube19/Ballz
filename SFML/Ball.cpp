@@ -1,5 +1,6 @@
 #include "Ball.h"
 #include "Maths.h"
+#include <iostream>
 
 namespace 
 {
@@ -43,6 +44,7 @@ void Ball::draw(RenderWindow& window) const
 ///////////////////////////////////////MOVE/////////////////////////////////////////
 void Ball::move(const int miliseconds)
 {
+	velocity += acceleration;
 	position += Vector2f(velocity.x * miliseconds, velocity.y * miliseconds);
 }
 
@@ -116,4 +118,9 @@ void Ball::setAcceleration(const Vector2f& newAcc)
 void Ball::accelerate(const Vector2f& acc)
 {
 	acceleration += acc;
+}
+
+void Ball::deaccelerate()
+{
+	acceleration = Vector2f(0, 0);
 }

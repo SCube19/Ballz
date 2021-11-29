@@ -74,4 +74,5 @@ public:
 	void setScreenCollision(bool state);
 	void setAcceleration(const Vector2f& newAcc);
 	void accelerate(const Vector2f& acc);
+	void deaccelerate();
 };

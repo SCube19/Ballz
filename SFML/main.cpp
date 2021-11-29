@@ -10,7 +10,8 @@
 
 using namespace sf;
 
-//time in s
+//time in seconds
+//the target is 60fps
 constexpr int timeStep = 16;
 
 int main()
@@ -32,7 +33,7 @@ int main()
 		, ball4(20, 1, Vector2f(1, 0.5), Vector2f(1000, 1000), soundb),
 		ball5(100, 1, Vector2f(0.5, 0.75), Vector2f(1500, 500), soundb);
 
-	Ball sun(100, 10, Vector2f(0, 0), Vector2f(1920 / 2, 1080 / 2), soundb), planet(20, 1, Vector2f(1, 0), Vector2f(50, 50), soundb);
+	Ball sun(100, 1000, Vector2f(0, 0), Vector2f(1920 / 2, 1080 / 2), soundb), planet(20, 1, Vector2f(0.75f, 0), Vector2f(1920 / 2, 150), soundb);
 
 	Ball binary1(100, 5, Vector2f(0, 0.5f), Vector2f(1920 / 4, 1080 / 2), soundb);
 	Ball binary2(100, 5, Vector2f(0, -0.5f), Vector2f(3 * 1920 / 4, 1080 / 2), soundb);
@@ -50,7 +51,7 @@ int main()
 
 	Ball* selectedBall = nullptr;
 	
-	
+	//used for semi-constant frame time physics
 	int notSimulatedTime = 0;
 	//frame time measurment
 	Clock frameClock;
@@ -106,6 +107,8 @@ int main()
 
 		//time passed from last frame
 		notSimulatedTime += frameClock.restart().asMilliseconds();
+
+		//simulate in timeStep discrete steps until notSimulatedTime is smaller than the step
 		while (notSimulatedTime >= timeStep)
 		{
 			Ballz::applyPhysics(ballz, window, timeStep);
