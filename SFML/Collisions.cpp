@@ -101,7 +101,9 @@ void Ballz::dynamicCollisionResolution(Ball& first, Ball& second)
 	float p2 = ((second.getMass() - first.getMass()) / (first.getMass() + second.getMass())) * dotNorm2 
 		+ 2 * (first.getMass() / (first.getMass() + second.getMass())) * dotNorm1;
 
-	first.setVelocity(Vector2f(tangent * dotTan1 + normal * p1));
-	second.setVelocity(Vector2f(tangent * dotTan2 + normal * p2));
+	first.setVelocity(Vector2f(0, 0));
+	second.setVelocity(Vector2f(0, 0));
+	first.accelerate(Vector2f(tangent * dotTan1 + normal * p1));
+	second.accelerate(Vector2f(tangent * dotTan2 + normal * p2));
 	first.play();
 }

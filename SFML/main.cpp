@@ -34,14 +34,20 @@ int main()
 		ball5(100, 1, Vector2f(0.5, 0.75), Vector2f(1500, 500), soundb);
 
 	Ball sun(100, 1000, Vector2f(0, 0), Vector2f(1920 / 2, 1080 / 2), soundb), planet(20, 1, Vector2f(0.7f, 0), Vector2f(1920 / 2, 150), soundb);
+	
+	Ball binary1(50, 150, Vector2f(0, 0.5f), Vector2f(1920 / 4, 1080 / 2), soundb);
+	Ball binary2(50, 150, Vector2f(0, -0.5f), Vector2f(3 * 1920 / 4, 1080 / 2), soundb);
 
-	Ball binary1(100, 5, Vector2f(0, 0.5f), Vector2f(1920 / 4, 1080 / 2), soundb);
-	Ball binary2(100, 5, Vector2f(0, -0.5f), Vector2f(3 * 1920 / 4, 1080 / 2), soundb);
+	Ball stationary1(50, 20, Vector2f(0, 0), Vector2f(1920 / 4, 1080 / 2), soundb);
+	Ball stationary2(50, 20, Vector2f(0, 0), Vector2f(3 * 1920 / 4, 1080 / 2), soundb);
+
+	ballz.push_back(stationary1);
+	ballz.push_back(stationary2);
 	//ballz.push_back(binary1);
 	//ballz.push_back(binary2);
 
-	ballz.push_back(sun);
-	ballz.push_back(planet);
+	//ballz.push_back(sun);
+	//ballz.push_back(planet);
 	
 	//ballz.push_back(ball);
 	//ballz.push_back(ball2);

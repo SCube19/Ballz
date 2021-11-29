@@ -26,7 +26,6 @@ void Ballz::applyPhysics(std::vector<Ball>& ballz, RenderWindow& window, const i
 {
 
 	//physics
-	std::for_each(ballz.begin(), ballz.end(), [](Ball& ball) {ball.deaccelerate();});
 	for (int i = 0; i < ballz.size(); i++)
 	{
 		for (int j = i + 1; j < ballz.size(); j++)
@@ -40,6 +39,8 @@ void Ballz::applyPhysics(std::vector<Ball>& ballz, RenderWindow& window, const i
 	{
 		x.move(timeStep);
 	}
+
+	std::for_each(ballz.begin(), ballz.end(), [](Ball& ball) {ball.deaccelerate(); });
 
 	//screen collisions detection and resolution
 	for (auto& x : ballz)
