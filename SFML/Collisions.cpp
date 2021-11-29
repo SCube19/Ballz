@@ -65,10 +65,15 @@ void Ballz::staticCollisionResolution(Ball& first, Ball& second)
 {
 	//the actual vector we are using to push out the balls
 	//it's vector along the overlap with length of half the overlap
-	Vector2f moveVec = 0.5f * overlap(first, second) * normalize(directionVector(first, second));
+	Vector2f moveVec = overlap(first, second) * normalize(directionVector(first, second));
+	double sum = (double)vectorLength(first.getVelocity()) + (double)vectorLength(second.getVelocity());
 
-	first.move(-moveVec);
-	second.move(moveVec);
+	//resolution is proportional to the relative velocity of ballz (vel1 / (vel1 + vel2))
+	//it means that slower ball is moved less but overall moving is enough to resolve collison
+	//for example if vel1 == vel2 then (vel1 / (vel1 + vel2)) == (vel2 / (vel1 + vel2)) == 1/2
+	//so noth ballz move out of each other the same amount
+	first.move(-moveVec * (float)((double)vectorLength(first.getVelocity()) / sum));
+	second.move(moveVec * (float)((double)vectorLength(second.getVelocity()) / sum));
 }
 
 ///////////////////DYNAMIC COLLISION RESOLUTION/////////////////////////
