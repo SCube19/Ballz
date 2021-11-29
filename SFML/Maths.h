@@ -61,6 +61,6 @@ namespace Ballz
 	//Returns 'a' from ax + b that is parallel to the given [vec]
 	inline float vectorLine(const Vector2f& vec)
 	{
-		return vec.x == 0 ? 0 : vec.y / vec.x;
+		return vec.x == 0 ? INFINITY : vec.y / vec.x;
 	}
 }
