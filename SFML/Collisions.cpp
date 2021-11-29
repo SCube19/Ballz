@@ -6,10 +6,13 @@
 
 namespace
 {
-	inline void resolveScreenCollision(Ball& ball, const Vector2f& newVelocity, float displacement)
+	inline void resolveScreenCollision(Ball& ball, const Vector2f& newVelocity, float displacement, bool vertical)
 	{
 		ball.setVelocity(newVelocity);
-		ball.move(Vector2f(displacement, Ballz::vectorLine(ball.getVelocity()) * displacement));
+		if (vertical)
+			ball.move(Vector2f(displacement / Ballz::vectorLine(ball.getVelocity()), displacement));
+		else
+			ball.move(Vector2f(displacement, Ballz::vectorLine(ball.getVelocity()) * displacement));
 	}
 }
 
@@ -21,7 +24,8 @@ void Ballz::screenCollisionResolution(Ball& ball, const RenderWindow& window)
 		resolveScreenCollision(
 			ball,
 			Vector2f(-ball.getVelocity().x, ball.getVelocity().y),
-			-ball.getPosition().x + ball.getRadius()
+			-ball.getPosition().x + ball.getRadius(),
+			false
 		);
 
 	//right
@@ -29,23 +33,27 @@ void Ballz::screenCollisionResolution(Ball& ball, const RenderWindow& window)
 		resolveScreenCollision(
 			ball,
 			Vector2f(-ball.getVelocity().x, ball.getVelocity().y),
-			window.getSize().x - ball.getPosition().x - ball.getRadius()
+			window.getSize().x - ball.getPosition().x - ball.getRadius(),
+			false
 		);
 	
+	float a = Ballz::vectorLine(ball.getVelocity());
 	//up
 	if (ball.getPosition().y - ball.getRadius() < 0)
 		resolveScreenCollision(
 			ball,
 			Vector2f(ball.getVelocity().x, -ball.getVelocity().y),
-			-ball.getPosition().y + ball.getRadius()
-			);
+			(-ball.getPosition().y + ball.getRadius()),
+			true
+		);
 
 	//down
 	else if (ball.getPosition().y + ball.getRadius() > window.getSize().y)
 		resolveScreenCollision(
 			ball,
 			Vector2f(ball.getVelocity().x, -ball.getVelocity().y),
-			window.getSize().y - ball.getPosition().y - ball.getRadius()
+			(window.getSize().y - ball.getPosition().y - ball.getRadius()),
+			true
 		);
 
 	else
