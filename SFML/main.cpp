@@ -32,7 +32,7 @@ int main()
 		, ball4(20, 1, Vector2f(1, 0.5), Vector2f(1000, 1000), soundb),
 		ball5(100, 1, Vector2f(0.5, 0.75), Vector2f(1500, 500), soundb);
 
-	Ball sun(100, 15, Vector2f(0.25, -0.5), Vector2f(1920 / 2, 1080 / 2), soundb), planet(20, 1, Vector2f(1, 0), Vector2f(50, 50), soundb);
+	Ball sun(100, 10, Vector2f(0, 0), Vector2f(1920 / 2, 1080 / 2), soundb), planet(20, 1, Vector2f(1, 0), Vector2f(50, 50), soundb);
 
 	Ball binary1(100, 5, Vector2f(0, 0.5f), Vector2f(1920 / 4, 1080 / 2), soundb);
 	Ball binary2(100, 5, Vector2f(0, -0.5f), Vector2f(3 * 1920 / 4, 1080 / 2), soundb);

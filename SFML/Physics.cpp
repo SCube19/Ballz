@@ -19,9 +19,9 @@ void Ballz::gravity(Ball& first, Ball& second)
 void Ballz::applyPhysics(std::vector<Ball>& ballz, RenderWindow& window, const int timeStep)
 {
 	//physics
-	//for (int i = 0; i < ballz.size(); i++)
-		//for (int j = i + 1; j < ballz.size(); j++)
-			//gravity(ballz[i], ballz[j]);
+	for (int i = 0; i < ballz.size(); i++)
+		for (int j = i + 1; j < ballz.size(); j++)
+			gravity(ballz[i], ballz[j]);
 
 	//position update
 	for (auto& x : ballz)
