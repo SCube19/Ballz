@@ -41,9 +41,9 @@ void Ball::draw(RenderWindow& window) const
 }
 
 ///////////////////////////////////////MOVE/////////////////////////////////////////
-void Ball::move(const Time& elapsed)
+void Ball::move(const int miliseconds)
 {
-	position += Vector2f(velocity.x * elapsed.asMilliseconds(), velocity.y * elapsed.asMilliseconds());
+	position += Vector2f(velocity.x * miliseconds, velocity.y * miliseconds);
 }
 
 void Ball::move(const Vector2f& displacement)

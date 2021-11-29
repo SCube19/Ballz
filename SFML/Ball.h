@@ -52,7 +52,7 @@ public:
 	void draw(RenderWindow& window) const;
 
 	//Real-time move using velocity
-	void move(const Time& elapsed);
+	void move(const int miliseconds);
 	//fixed value move
 	void move(const Vector2f& displacement);
 
